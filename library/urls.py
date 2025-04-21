@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from books.api import viewsets as booksviewsets
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 route = routers.DefaultRouter()
 
@@ -25,5 +26,7 @@ route.register(r'books', booksviewsets.BooksViewset, basename="Books")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('token/', TokenObtainPairView.as_view()),
+    path('token/refresh/', TokenRefreshView.as_view()),
     path('', include(route.urls))
 ]
